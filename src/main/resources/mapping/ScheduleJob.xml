@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haigou.dao.ScheduleJobDao">
+	<resultMap id="BaseResultMap"
+		type="com.haigou.model.ScheduleJob">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="job_name" property="job_name" jdbcType="VARCHAR" />
+		<result column="alias_name" property="alias_name" jdbcType="VARCHAR" />
+		<result column="job_group" property="job_group" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="cron_expression" property="cron_expression"
+			jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+		<result column="job_class" property="job_class" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, job_name, alias_name, job_group, job_class, status,
+		cron_expression, is_sync, description, create_time, update_time
+	</sql>
+	<select id="queryList" resultMap="BaseResultMap">
+		select * from
+		datacenter_schedule_job
+	</select>
+
+</mapper>
