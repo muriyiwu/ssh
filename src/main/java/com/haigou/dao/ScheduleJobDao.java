@@ -1,6 +1,7 @@
 package com.haigou.dao;
 
 import com.haigou.model.ScheduleJob;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -9,4 +10,7 @@ import java.util.List;
  */
 public interface ScheduleJobDao {
     List<ScheduleJob> queryList();
+    Long insert(ScheduleJob scheduleJob);
+    void deleteById(Long scheduleJobId);
+    void updateStatus(@Param("scheduleJobId")Long scheduleJobId, @Param("status")String status);
 }

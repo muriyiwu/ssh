@@ -9,4 +9,7 @@ import java.util.List;
  */
 public interface ScheduleJobService {
     public abstract List<ScheduleJob> listJob();
+    public abstract void testThrowsRuntimeExceptionTransaction();
+    public abstract void testCatchRuntimeExceptionTransaction();
+    public abstract void testThrowsExceptionTransaction() throws Exception;
 }

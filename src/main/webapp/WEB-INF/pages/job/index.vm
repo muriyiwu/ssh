@@ -1,1 +1,4 @@
-<a href="jobList.xhtml">list all job</a>
+<a href="jobList.xhtml">list all job</a><br>
+<a href="testThrowsRuntimeExceptionTransaction.xhtml">testThrowsRuntimeExceptionTransaction</a><br>
+<a href="testCatchRuntimeExceptionTransaction.xhtml">testCatchRuntimeExceptionTransaction</a><br>
+<a href="testThrowsExceptionTransaction.xhtml">testThrowsExceptionTransaction</a><br>

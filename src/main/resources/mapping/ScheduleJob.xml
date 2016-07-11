@@ -24,4 +24,25 @@
 		datacenter_schedule_job
 	</select>
 
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete from datacenter_schedule_job
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id"
+			parameterType="com.haigou.model.ScheduleJob">
+		insert into datacenter_schedule_job (job_name,
+		alias_name, job_group, status, cron_expression,
+		description, create_time, update_time,job_class)
+		values
+		(#{job_name,jdbcType=VARCHAR},#{alias_name,jdbcType=VARCHAR},#{job_group,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR},
+		#{cron_expression,jdbcType=VARCHAR},#{description,jdbcType=VARCHAR},now(),now(),#{job_class,jdbcType=VARCHAR})
+	</insert>
+
+	<update id="updateStatus" >
+		update datacenter_schedule_job set
+		status = #{status,jdbcType=VARCHAR},
+		update_time = now()
+		where id = #{scheduleJobId,jdbcType=BIGINT}
+	</update>
 </mapper>

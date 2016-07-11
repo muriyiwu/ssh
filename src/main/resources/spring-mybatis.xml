@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-                            http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+                           http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-4.2.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
@@ -41,4 +50,26 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <context:annotation-config />
+
+    <!-- 注解事务 start-->
+    <!-- 使用注解的包路径 -->
+    <context:component-scan base-package="com.haigou.service" />
+    <!-- 支持  @Transactional 标记 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!-- 注解事务 end-->
+
+    <!-- 使用tx标签配置的拦截器 start-->
+    <!-- 定义事务，并配置传播机制 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*" propagation="REQUIRED"  rollback-for="" />
+        </tx:attributes>
+    </tx:advice>
+    <!-- 定义切面 -->
+    <aop:config>
+        <aop:pointcut id="interceptorPointCuts" expression="execution(* com.haigou.service.*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="interceptorPointCuts" />
+    </aop:config>
+    <!-- 使用tx标签配置的拦截器 end-->
 </beans>

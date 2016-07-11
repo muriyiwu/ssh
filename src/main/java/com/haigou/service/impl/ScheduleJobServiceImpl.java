@@ -24,4 +24,30 @@ public class ScheduleJobServiceImpl implements ScheduleJobService{
         logger.warn(JSON.toJSONString(jobs));
         return jobs;
     }
+
+    public void testThrowsRuntimeExceptionTransaction() {
+        scheduleJobDao.updateStatus(65L,"ONLINE");
+        List<ScheduleJob> jobs = scheduleJobDao.queryList();
+        logger.warn(JSON.toJSONString(jobs));
+        throw new RuntimeException("测试事务管理");
+    }
+
+    public void testCatchRuntimeExceptionTransaction() {
+        try{
+            scheduleJobDao.updateStatus(65L,"ONLINE");
+            List<ScheduleJob> jobs = scheduleJobDao.queryList();
+            logger.warn(JSON.toJSONString(jobs));
+            throw new RuntimeException("测试事务管理");
+        } catch (Exception e){
+            logger.error("事务异常捕获",e);
+        }
+
+    }
+
+    public void testThrowsExceptionTransaction() throws Exception {
+        scheduleJobDao.updateStatus(65L,"OFFLINE");
+        List<ScheduleJob> jobs = scheduleJobDao.queryList();
+        logger.warn(JSON.toJSONString(jobs));
+        throw new Exception("测试事务管理");
+    }
 }
