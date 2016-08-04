@@ -7,7 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <name>com.haigou Maven Webapp</name>
     <url>http://maven.apache.org</url>
-    <repositories>
+    <!--<repositories>
         <repository>
             <id>local-nexus</id>
             <url>http://192.168.2.224:8081/nexus/content/groups/public/</url>
@@ -18,7 +18,7 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-    </repositories>
+    </repositories>-->
     <properties>
         <!-- spring版本号 -->
         <spring.version>4.2.5.RELEASE</spring.version>
